@@ -18,9 +18,7 @@ class User extends Authenticatable
      * @var string[]
      */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+        'name','email', 'password', 'ci','address','phone','role'
     ];
 
     /**
@@ -30,8 +28,9 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password',
-        'remember_token',
+        'remember_token','pivot'
     ];
+
 
     /**
      * The attributes that should be cast.
@@ -41,4 +40,18 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function especialidades()
+    {
+        return $this->belongsToMany(Especialidad::class)->withTimesTamps();
+    }
+
+    public function scopePatients($query)
+    {
+        return $query->where('role','patient');
+    }
+    public function scopeDoctors($query)
+    {
+        return $query->where('role','doctor');
+    }
 }
