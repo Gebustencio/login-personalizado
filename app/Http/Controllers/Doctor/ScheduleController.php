@@ -40,7 +40,7 @@ class ScheduleController extends Controller
     public function store(Request $request)
     {
         //dd($request->all());
-        $active=$request->input('active') ?: [];
+        $active=$request->input('active');// ?: [];
 
         $mornig_start=$request->input('mornig_start');
         $mornig_end=$request->input('mornig_end');
